@@ -1,0 +1,16 @@
+{
+  "name": "wasm-clingo",
+  "version": "0.0.0",
+  "description": "Clingo compiled to WebAssembly",
+  "main": "clingo.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/domoritz/wasm-clingo.git"
+  },
+  "author": "Dominik Moritz",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/domoritz/wasm-clingo/issues"
+  },
+  "homepage": "https://github.com/domoritz/wasm-clingo"
+}
