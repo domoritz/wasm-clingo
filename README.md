@@ -1,6 +1,6 @@
 # wasm-clingo
 
-[![npm version](https://img.shields.io/npm/v/vega-lite.svg)](https://www.npmjs.com/package/vega-lite)
+[![npm version](https://img.shields.io/npm/v/wasm-clingo.svg)](https://www.npmjs.com/package/wasm-clingo)
 
 [Clingo](https://github.com/potassco/clingo) compiled to [WebAssembly](https://webassembly.org/).
 
