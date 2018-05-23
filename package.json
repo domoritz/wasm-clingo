@@ -1,6 +1,6 @@
 {
   "name": "wasm-clingo",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Clingo compiled to WebAssembly",
   "main": "clingo.js",
   "repository": {
