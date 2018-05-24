@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Clingo WASM Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+Input:
+<pre id="input">
+% instance
+motive(harry).
+motive(sally).
+guilty(harry).
+
+% encoding
+innocent(Suspect) :- motive(Suspect), not guilty(Suspect).
+</pre>
+
+Status:
+<pre id="status"></pre>
+
+Output:
+<pre id="out"></pre>
+    
+<script>
+    var Module = {
+        preRun: [],
+        postRun: [],
+        print: function(text) {
+            const p = document.createElement('p');
+            p.innerText = text;
+            document.getElementById('out').appendChild(p);
+        },
+        printErr: function(err) {
+            Module.setStatus('Error')
+            console.error(err)
+        },
+        onRuntimeInitialized: function() {
+            this.ccall('run', 'number', ['string', 'string'], [document.getElementById('input').innerText, '0'])
+        },
+        setStatus: function(text) {
+            document.getElementById('status').innerText = text;
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function(left) {
+            this.totalDependencies = Math.max(this.totalDependencies, left);
+            Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+        }
+    };
+    window.onerror = function(event) {
+        // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function(text) {
+            if (text) Module.printErr('[post-exception status] ' + text);
+        };
+    };
+    Module.setStatus('Downloading...');
+</script>
+<script src="clingo.js"></script>
+
+</body>
+</html>
