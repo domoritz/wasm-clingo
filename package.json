@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/domoritz/wasm-clingo/issues"
   },
-  "homepage": "https://github.com/domoritz/wasm-clingo"
+  "homepage": "https://github.com/domoritz/wasm-clingo",
+  "scripts": {
+    "start": "python3 serve.py"
+  }
 }
