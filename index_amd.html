@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Clingo WASM with AMD Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/d3-require@1"></script>
+</head>
+<body>
+
+<p>
+Input:
+<pre id="input">
+% instance
+motive(harry).
+motive(sally).
+guilty(harry).
+
+% encoding
+innocent(Suspect) :- motive(Suspect), not guilty(Suspect).
+</pre>
+</p>
+
+<p>
+Status:
+<pre id="status"></pre>
+</p>
+
+<p>
+Output:
+<pre id="out"></pre>
+</p>
+ 
+<script>
+    d3.require("wasm-clingo").then(Clingo => {
+        const Module = {
+            locateFile: (file) => `https://unpkg.com/wasm-clingo@0.0.3/${file}`,
+            print: function(text) {
+                const p = document.createElement('p');
+                p.innerText = text;
+                document.getElementById('out').appendChild(p);
+            },
+            printErr: function(err) {
+                Module.setStatus('Error')
+                console.error(err)
+            },
+            setStatus: function(text) {
+                document.getElementById('status').innerText = text;
+            },
+            totalDependencies: 0,
+            monitorRunDependencies: function(left) {
+                this.totalDependencies = Math.max(this.totalDependencies, left);
+                Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+            }
+        }
+
+        Clingo(Module).then(clingo => {
+            clingo.ccall('run', 'number', ['string', 'string'], [document.getElementById('input').innerText, '0'])
+        });
+
+        window.onerror = function(event) {
+            // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+            Module.setStatus('Exception thrown, see JavaScript console');
+            Module.setStatus = function(text) {
+                if (text) Module.printErr('[post-exception status] ' + text);
+            };
+        };
+        Module.setStatus('Downloading...');
+    });
+</script>
+
+</body>
+</html>
