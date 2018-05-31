@@ -30,9 +30,10 @@ Status:
 Output:
 <pre id="out"></pre>
 </p>
-    
+
+<script src="clingo.js"></script>
 <script>
-    var Module = {
+    var Clingo = {
         preRun: [],
         postRun: [],
         print: function(text) {
@@ -41,7 +42,7 @@ Output:
             document.getElementById('out').appendChild(p);
         },
         printErr: function(err) {
-            Module.setStatus('Error')
+            Clingo.setStatus('Error')
             console.error(err)
         },
         onRuntimeInitialized: function() {
@@ -53,19 +54,20 @@ Output:
         totalDependencies: 0,
         monitorRunDependencies: function(left) {
             this.totalDependencies = Math.max(this.totalDependencies, left);
-            Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+            Clingo.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
         }
     };
     window.onerror = function(event) {
         // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
-        Module.setStatus('Exception thrown, see JavaScript console');
-        Module.setStatus = function(text) {
-            if (text) Module.printErr('[post-exception status] ' + text);
+        Clingo.setStatus('Exception thrown, see JavaScript console');
+        Clingo.setStatus = function(text) {
+            if (text) Clingo.printErr('[post-exception status] ' + text);
         };
     };
-    Module.setStatus('Downloading...');
+    Clingo.setStatus('Downloading...');
+
+    Module(Clingo);
 </script>
-<script src="clingo.js"></script>
 
 </body>
 </html>
