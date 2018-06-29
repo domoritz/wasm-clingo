@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/wasm-clingo.svg)](https://www.npmjs.com/package/wasm-clingo)
 
-[Clingo](https://github.com/potassco/clingo) compiled to [WebAssembly](https://webassembly.org/) with [Emscripten](https://kripken.github.io/emscripten-site/).
+[Clingo](https://github.com/potassco/clingo) compiled to [WebAssembly](https://webassembly.org/) with [Emscripten](https://kripken.github.io/emscripten-site/). You can try clingo online at https://aluriak.github.io/webclingo-example/. 
 
 ## Installation
 
