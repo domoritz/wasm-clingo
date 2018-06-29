@@ -10,5 +10,4 @@
 
 ## Information
 
-Current version based on: https://github.com/potassco/clingo/tree/3a17d48
-Built with https://github.com/Aluriak/webclingo-example
+Current version based on: https://github.com/potassco/clingo/tree/3a17d48. Built with https://github.com/Aluriak/webclingo-example
