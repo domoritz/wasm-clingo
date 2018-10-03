@@ -35,7 +35,7 @@ Output:
 <script>
     d3.require("wasm-clingo").then(Clingo => {
         const Module = {
-            locateFile: (file) => `https://unpkg.com/wasm-clingo@0.0.6/${file}`,
+            locateFile: (file) => `https://unpkg.com/wasm-clingo@0.2.2/${file}`,
             print: function(text) {
                 const p = document.createElement('p');
                 p.innerText = text;
