@@ -5,13 +5,16 @@ import socketserver
 
 PORT = 8000
 
-Handler = http.server.SimpleHTTPRequestHandler
+class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        self.send_header('Access-Control-Allow-Origin', '*')
+        http.server.SimpleHTTPRequestHandler.end_headers(self)
 
-Handler.extensions_map.update({
+CORSRequestHandler.extensions_map.update({
     '.wasm': 'application/wasm'
 })
 
-httpd = socketserver.TCPServer(("", PORT), Handler)
+httpd = socketserver.TCPServer(("", PORT), CORSRequestHandler)
 
 print(f"Serving HTTP with WebAssembly support on 0.0.0.0 port {PORT} (http://0.0.0.0:{PORT}/) ...")
 try:
