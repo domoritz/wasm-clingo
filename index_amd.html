@@ -33,9 +33,11 @@ Output:
 </p>
  
 <script>
-    d3.require("wasm-clingo").then(Clingo => {
+    const version = '0.3.0';
+
+    d3.require(`wasm-clingo@${version}`).then(Clingo => {
         const Module = {
-            locateFile: (file) => `https://cdn.jsdelivr.net/npm/wasm-clingo/${file}`,
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/wasm-clingo@${version}/${file}`,
             print: function(text) {
                 const p = document.createElement('p');
                 p.innerText = text;

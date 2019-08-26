@@ -14,6 +14,6 @@
   },
   "homepage": "https://github.com/domoritz/wasm-clingo",
   "scripts": {
-    "start": "python3 serve.py"
+    "start": "./serve.py"
   }
 }

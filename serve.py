@@ -16,7 +16,7 @@ CORSRequestHandler.extensions_map.update({
 
 httpd = socketserver.TCPServer(("", PORT), CORSRequestHandler)
 
-print(f"Serving HTTP with WebAssembly support on 0.0.0.0 port {PORT} (http://0.0.0.0:{PORT}/) ...")
+print(f"Serving HTTP with WebAssembly support on 0.0.0.0 port {PORT} (http://0.0.0.0:{PORT}/index.html and http://0.0.0.0:{PORT}/index_amd.html) ...")
 try:
     httpd.serve_forever()
 except KeyboardInterrupt:
